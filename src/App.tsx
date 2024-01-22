@@ -1,25 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import HomePage from "./HomePage";
+import ProfilePage from "./ProfilePage";
+import useUserList from "./UseUserList";
+import Sidebar from "./Sidebar";
+
 function App() {
+
+    const { allUsers, addElement} = useUserList()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+<div className="h-full w-full bg-gray-200">
+      <Router>
+        <Routes>
+          <Route path='/home' element={<HomePage userList ={allUsers}/>} />
+          <Route path='/profile' element={<ProfilePage addElem={addElement}/>} />
+        </Routes>
+      </Router></div>
+
   );
 }
 
